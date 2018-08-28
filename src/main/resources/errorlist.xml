@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+    <error id="purgedConfiguration" severity="information"
+           msg="The configuration &apos;&apos; was not checked because its code equals another one."
+           verbose="The configuration &apos;&apos; was not checked because its code equals another one."/>
+    <error id="autoVariablesAssignGlobalPointer" severity="warning"
+           msg="Address of local array array is assigned to global pointer pointer and not reassigned before array goes out of scope."
+           verbose="Address of local array array is assigned to global pointer pointer and not reassigned before array goes out of scope."
+           cwe="562"/>
+    <error id="assignBoolToFloat" severity="style" msg="Boolean value assigned to floating point variable."
+           verbose="Boolean value assigned to floating point variable." cwe="704"/>
+    <error id="copyCtorAndEqOperator" severity="warning"
+           msg="The class &apos;class&apos; has &apos;operator=&apos; but lack of &apos;copy constructor&apos;."
+           verbose="The class &apos;class&apos; has &apos;operator=&apos; but lack of &apos;copy constructor&apos;."/>
+    <error id="unsafeClassDivZero" severity="style"
+           msg="Public interface of Class is not safe. When calling Class::dostuff(), if parameter x is 0 that leads to division by zero."
+           verbose="Public interface of Class is not safe. When calling Class::dostuff(), if parameter x is 0 that leads to division by zero."/>
+    <error id="identicalConditionAfterEarlyExit" severity="warning"
+           msg="Identical condition &apos;x&apos;, second condition is always false"
+           verbose="Identical condition &apos;x&apos;, second condition is always false" cwe="398"/>
+    <error id="invalidTestForOverflow" severity="warning"
+           msg="Invalid test for overflow &apos;x + u &lt; x&apos;. Condition is always false unless there is overflow, and overflow is undefined behaviour."
+           verbose="Invalid test for overflow &apos;x + u &lt; x&apos;. Condition is always false unless there is overflow, and overflow is undefined behaviour."
+           cwe="570"/>
+    <error id="pointerAdditionResultNotNull" severity="warning"
+           msg="Comparison is wrong. Result of &apos;ptr+1&apos; can&apos;t be 0 unless there is pointer overflow, and pointer overflow is undefined behaviour."
+           verbose="Comparison is wrong. Result of &apos;ptr+1&apos; can&apos;t be 0 unless there is pointer overflow, and pointer overflow is undefined behaviour."/>
+    <error id="unhandledExceptionSpecification" severity="style"
+           msg="Unhandled exception specification when calling function foo()."
+           verbose="Unhandled exception specification when calling function foo(). Either use a try/catch around the function call, or add a exception specification for funcname() also."
+           cwe="703" inconclusive="true"/>
+    <error id="leakUnsafeArgAlloc" severity="warning"
+           msg="Unsafe allocation. If funcName() throws, memory could be leaked. Use make_shared&lt;int&gt;() instead."
+           verbose="Unsafe allocation. If funcName() throws, memory could be leaked. Use make_shared&lt;int&gt;() instead."
+           cwe="401" inconclusive="true"/>
+    <error id="nullPointerArithmetic" severity="error" msg="Overflow in pointer arithmetic, NULL pointer is subtracted."
+           verbose="Overflow in pointer arithmetic, NULL pointer is subtracted." cwe="682"/>
+    <error id="shiftNegativeLHS" severity="portability"
+           msg="Shifting a negative value is technically undefined behaviour"
+           verbose="Shifting a negative value is technically undefined behaviour" cwe="758"/>
+    <error id="signedCharArrayIndex" severity="warning" msg="Signed &apos;char&apos; type used as array index."
+           verbose="Signed &apos;char&apos; type used as array index. If the value can be greater than 127 there will be a buffer underflow because of sign extension."
+           cwe="128"/>
+    <error id="unknownSignCharArrayIndex" severity="portability" msg="&apos;char&apos; type used as array index."
+           verbose="&apos;char&apos; type used as array index. Values greater that 127 will be treated depending on whether &apos;char&apos; is signed or unsigned on target platform."
+           cwe="758"/>
+    <error id="suspiciousCase" severity="warning"
+           msg="Found suspicious case label in switch(). Operator &apos;||&apos; probably doesn&apos;t work as intended."
+           verbose="Using an operator like &apos;||&apos; in a case label is suspicious. Did you intend to use a bitwise operator, multiple case labels or if/else instead?"
+           cwe="398" inconclusive="true"/>
+    <error id="suspiciousEqualityComparison" severity="warning"
+           msg="Found suspicious equality comparison. Did you intend to assign a value instead?"
+           verbose="Found suspicious equality comparison. Did you intend to assign a value instead?" cwe="482"
+           inconclusive="true"/>
+    <error id="unusedLabelSwitch" severity="warning"
+           msg="Label &apos;&apos; is not used. Should this be a &apos;case&apos; of the enclosing switch()?"
+           verbose="Label &apos;&apos; is not used. Should this be a &apos;case&apos; of the enclosing switch()?"
+           cwe="398"/>
+    <error id="unknownEvaluationOrder" severity="error"
+           msg="Expression &apos;x = x++;&apos; depends on order of evaluation of side effects"
+           verbose="Expression &apos;x = x++;&apos; depends on order of evaluation of side effects" cwe="768"/>
+    <error id="accessMoved" severity="warning" msg="Access of moved variable &apos;v&apos;."
+           verbose="Access of moved variable &apos;v&apos;." cwe="672"/>
+    <error id="accessForwarded" severity="warning" msg="Access of forwarded variable &apos;v&apos;."
+           verbose="Access of forwarded variable &apos;v&apos;." cwe="672"/>
+    <error id="funcArgNamesDifferent" severity="style"
+           msg="Function &apos;function&apos; argument 2 names different: declaration &apos;A&apos; definition &apos;B&apos;."
+           verbose="Function &apos;function&apos; argument 2 names different: declaration &apos;A&apos; definition &apos;B&apos;."
+           cwe="628" inconclusive="true"/>
+    <error id="funcArgOrderDifferent" severity="warning"
+           msg="Function &apos;function&apos; argument order different: declaration &apos;&apos; definition &apos;&apos;"
+           verbose="Function &apos;function&apos; argument order different: declaration &apos;&apos; definition &apos;&apos;"
+           cwe="683"/>
+    <error id="reademptycontainer" severity="style" msg="Reading from empty STL container &apos;var&apos;"
+           verbose="Reading from empty STL container &apos;var&apos;" cwe="398" inconclusive="true"/>
+    <error id="sizeofFunctionCall" severity="warning" msg="Found function call inside sizeof()."
+           verbose="Found function call inside sizeof()." cwe="682"/>
+    <error id="multiplySizeof" severity="warning" msg="Multiplying sizeof() with sizeof() indicates a logic error."
+           verbose="Multiplying sizeof() with sizeof() indicates a logic error." cwe="682" inconclusive="true"/>
+    <error id="divideSizeof" severity="warning" msg="Division of result of sizeof() on pointer type."
+           verbose="Division of result of sizeof() on pointer type. sizeof() returns the size of the pointer, not the size of the memory area it points to."
+           cwe="682" inconclusive="true"/>
+    <error id="overlappingStrcmp" severity="warning"
+           msg="The expression &apos;strcmp(x,&quot;def&quot;) != 0&apos; is suspicious. It overlaps &apos;strcmp(x,&quot;abc&quot;) == 0&apos;."
+           verbose="The expression &apos;strcmp(x,&quot;def&quot;) != 0&apos; is suspicious. It overlaps &apos;strcmp(x,&quot;abc&quot;) == 0&apos;."/>
+    <error id="shiftTooManyBitsSigned" severity="error"
+           msg="Shifting signed 32-bit value by 31 bits is undefined behaviour"
+           verbose="Shifting signed 32-bit value by 31 bits is undefined behaviour" cwe="758"/>
+    <error id="floatConversionOverflow" severity="error"
+           msg="Undefined behaviour: float (1e+100) to integer conversion overflow."
+           verbose="Undefined behaviour: float (1e+100) to integer conversion overflow." cwe="190"/>
+</results>

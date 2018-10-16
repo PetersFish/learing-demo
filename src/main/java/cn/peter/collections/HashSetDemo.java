@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class HashSetDemo {
 
     public static void main(String[] args) {
-        HashSet<Integer> integers = new HashSet<>();
+        HashSet<Integer> integers = new HashSet<Integer>();
         boolean add = integers.add(1);
         boolean add2 = integers.add(1);
         System.out.println(add+":"+add2);

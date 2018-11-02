@@ -7,7 +7,9 @@ public class RegDemo3 {
 
     public static void main(String[] args) {
 
-        String comment = "/*ffffff*/";
+        String comment = "/*ffffff*/";/*hahahahha
+        biibli
+        */
         boolean startsWith = comment.startsWith("/\\*");
         System.out.println(startsWith);
     }

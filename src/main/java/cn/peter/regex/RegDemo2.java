@@ -11,11 +11,11 @@ public class RegDemo2 {
 
         String code = " memset( final, 0, sizeof( final));/* lalalalalal */";
 
-        Matcher startMatcher = CommentMatcher.START_MATCHER.getMatcher(code);
+        Matcher startMatcher = CommentMatcher.START_MATCHER.resetMatcher(code);
         boolean matches = startMatcher.matches();
         System.out.println(matches);
 
-        Matcher matcher = CommentMatcher.END_MATCHER.getMatcher(code);
+        Matcher matcher = CommentMatcher.END_MATCHER.resetMatcher(code);
         boolean matches1 = matcher.matches();
         System.out.println(matches1);
     }

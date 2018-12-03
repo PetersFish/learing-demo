@@ -7,7 +7,6 @@ import difflib.Patch;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +25,9 @@ public class FileDiffDemo {
                          "\n" +
                          "    public static void main(String[] args) {\n" +
                          "        System.out.println(\"杩欐槸branch01鐨勪慨鏀癸細03\");\n" +
+                         "        System.out.println(\"杩欐槸branch01鐨勪慨鏀癸細03\");\n" +
+                         "        System.out.println(\"杩欐槸branch01鐨勪慨鏀癸細03\");\n" +
+                         "        System.out.println(\"杩欐槸branch01鐨勪慨鏀癸細03\");\n" +
                          "    }\n" +
                          "}\n";
         String newCode = "package cn.peter.demo;\n" +
@@ -33,7 +35,7 @@ public class FileDiffDemo {
                          "/**\n" +
                          " * @author Peter Yu 2018/11/8 16:29\n" +
                          " */\n" +
-                         "public class Demo4 {\n" +
+                         "public class Demo5 {\n" +
                          "\n" +
                          "    public static void main(String[] args) {\n" +
 //                         "        System.out.println(\"杩欐槸branch01鐨勪慨鏀癸細02\");\n" +

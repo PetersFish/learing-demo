@@ -1,13 +1,11 @@
 package cn.peter.compare;
 
 import org.apache.commons.lang.StringUtils;
-import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import javax.xml.parsers.SAXParser;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,7 +55,6 @@ public class RuleCompare {
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(file);
         Element rootElement = document.getRootElement();
-//        Element properties = rootElement.element("properties");
         for (Iterator<Element> it = rootElement.elementIterator("entry");it.hasNext();){
             Element element = it.next();
             String key = element.attribute("key").getValue();

@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.cert.Certificate;
 import java.util.*;
 
 /**
@@ -17,14 +18,49 @@ public class HttpClientUtils {
 
     private static final OkHttpClient client = createClient();
 
-    private static final OkHttpClient cacheClient;
+    private static final OkHttpClient cacheClient = createCacheClient();
 
-    static {
-        int size = 10*1024*1024;
+    private static final OkHttpClient httpsClient = createHttpsClient();
+
+    private static final OkHttpClient certificateClient = createCertificateClient();
+
+    private static final OkHttpClient connectionSpecClient = createConnectionSpecClient();
+
+    private static OkHttpClient createConnectionSpecClient() {ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+            .tlsVersions(TlsVersion.TLS_1_2)
+            .cipherSuites(
+                    CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                    CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+                    CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256)
+            .build();
+
+        return  new OkHttpClient.Builder()
+                .connectionSpecs(Collections.singletonList(spec))
+                .build();
+
+    }
+
+    private static OkHttpClient createCertificateClient() {
+        return new OkHttpClient.Builder()
+                .certificatePinner(new CertificatePinner.Builder()
+                                           .add("publicobject.com",
+                                                "sha256/afwiKY3RxoMmLkuRW1l7QsPZTJPwDS2pdDROQjXw8ig=")
+                                           .build())
+                .build();
+    }
+
+    private static OkHttpClient createCacheClient() {
+        int size = 10 * 1024 * 1024;
         File file = new File("temp/cache");
         Cache cache = new Cache(file, size);
-        cacheClient = new OkHttpClient.Builder()
+        return new OkHttpClient.Builder()
                 .cache(cache)
+                .build();
+    }
+
+    private static OkHttpClient createHttpsClient() {
+        return new OkHttpClient.Builder()
+                .connectionSpecs(Arrays.asList(ConnectionSpec.MODERN_TLS, ConnectionSpec.COMPATIBLE_TLS))
                 .build();
     }
 
@@ -109,40 +145,28 @@ public class HttpClientUtils {
         return getResponseContent(request);
     }
 
-
     private static OkHttpClient createClient() {
         return new OkHttpClient();
     }
 
     public static void main(String[] args) throws IOException {
-        String url = "http://www.baidu.com/s";
-        Map<String, String> params = new HashMap<>();
-        params.put("wd", "java");
+        String url = "https://kyfw.12306.cn/otn/";
+//        Map<String, String> params = new HashMap<>();
+//        params.put("wd", "java");
 
         Request request = new Request.Builder()
-                .url("http://publicobject.com/helloworld.txt")
+                .url(url)
                 .build();
 
-        String response1Body;
-        try (Response response1 = cacheClient.newCall(request).execute()) {
-            if (!response1.isSuccessful()) throw new IOException("Unexpected code " + response1);
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            System.out.println(response.body().string());
 
-            response1Body = response1.body().string();
-            System.out.println("Response 1 response:          " + response1);
-            System.out.println("Response 1 cache response:    " + response1.cacheResponse());
-            System.out.println("Response 1 network response:  " + response1.networkResponse());
+            for (Certificate certificate : response.handshake().peerCertificates()) {
+                System.out.println(CertificatePinner.pin(certificate));
+            }
+        } else {
+            System.out.println("request failed!");
         }
-
-        String response2Body;
-        try (Response response2 = cacheClient.newCall(request).execute()) {
-            if (!response2.isSuccessful()) throw new IOException("Unexpected code " + response2);
-
-            response2Body = response2.body().string();
-            System.out.println("Response 2 response:          " + response2);
-            System.out.println("Response 2 cache response:    " + response2.cacheResponse());
-            System.out.println("Response 2 network response:  " + response2.networkResponse());
-        }
-
-        System.out.println("Response 2 equals Response 1? " + response1Body.equals(response2Body));
     }
 }

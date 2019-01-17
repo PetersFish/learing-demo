@@ -8,9 +8,14 @@ import java.util.Set;
  */
 public class ThreadLocalDemo {
 
-    private static ThreadLocal<Set<Integer>> setThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> stringLocal = new ThreadLocal<>();
 
     public static void main(String[] args) {
-
+        String local = stringLocal.get();
+        if (local == null) {
+            stringLocal.set("Hello");
+        }
+        stringLocal.remove();
+        System.out.println(stringLocal.get());
     }
 }

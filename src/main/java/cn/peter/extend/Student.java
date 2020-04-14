@@ -2,10 +2,12 @@ package cn.peter.extend;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Peter Yu 2018/10/29 11:00
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Student extends Human {
 
